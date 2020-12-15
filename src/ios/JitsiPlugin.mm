@@ -9,7 +9,8 @@ CDVPluginResult *jitsiPluginResult = nil;
 - (void)join:(CDVInvokedUrlCommand *)command {
     NSString* serverUrl = [command.arguments objectAtIndex:0];
     NSString* room = [command.arguments objectAtIndex:1];
-    Boolean isAudioOnly = [[command.arguments objectAtIndex:2] boolValue];
+    NSString* token = [command.arguments objectAtIndex:2];
+    Boolean isAudioOnly = [[command.arguments objectAtIndex:3] boolValue];
     commandBack = command;
     jitsiMeetView = [[JitsiMeetView alloc] initWithFrame:self.viewController.view.frame];
     jitsiMeetView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -18,6 +19,7 @@ CDVPluginResult *jitsiPluginResult = nil;
     JitsiMeetConferenceOptions *options = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
         builder.serverURL = [NSURL URLWithString: serverUrl];
         builder.room = room;
+        builder.token = token;
         builder.subject = @" ";
         builder.welcomePageEnabled = NO;
         builder.audioOnly = isAudioOnly;

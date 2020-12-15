@@ -62,8 +62,9 @@ public class JitsiPlugin extends CordovaPlugin
     if (action.equals("join")) {
       String serverUrl = args.getString(0);
       String roomId = args.getString(1);
+      String token = args.getString(2);
       Boolean audioOnly = args.getBoolean(2);
-      this.join(serverUrl, roomId, audioOnly);
+      this.join(serverUrl, roomId, token, audioOnly);
       return true;
     } else if (action.equals("destroy")) {
       this.destroy(callbackContext);
@@ -115,7 +116,7 @@ public class JitsiPlugin extends CordovaPlugin
     }
   }
 
-  private void join(final String serverUrl, final String roomId, final Boolean audioOnly) {
+  private void join(final String serverUrl, final String roomId, final String token, final Boolean audioOnly) {
     Log.e(TAG, "join called! Server: " + serverUrl + ", room : " + roomId);
 
     cordova.getActivity().runOnUiThread(new Runnable() {
@@ -131,6 +132,7 @@ public class JitsiPlugin extends CordovaPlugin
 
         JitsiMeetConferenceOptions options = new JitsiMeetConferenceOptions.Builder()
             .setRoom(serverUrlObject.getProtocol() + "://" + serverUrlObject.getHost() + "/" +roomId)
+            .setToken(token)
             .setSubject(" ")
             .setAudioOnly(audioOnly)
             .setFeatureFlag("chat.enabled", false)
