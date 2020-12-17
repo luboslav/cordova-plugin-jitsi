@@ -23,6 +23,11 @@ CDVPluginResult *jitsiPluginResult = nil;
         builder.subject = @" ";
         builder.welcomePageEnabled = NO;
         builder.audioOnly = isAudioOnly;
+        builder.setFeatureFlag("chat.enabled", withBoolean: true);
+        builder.setFeatureFlag("invite.enabled", withBoolean: false);
+        builder.setFeatureFlag("calendar.enabled", withBoolean: false);
+        builder.setFeatureFlag("video-share.enabled", withBoolean: false);
+        builder.setFeatureFlag("live-streaming.enabled", withBoolean: false);
     }];
     
     [jitsiMeetView join: options];

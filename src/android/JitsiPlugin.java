@@ -135,9 +135,11 @@ public class JitsiPlugin extends CordovaPlugin
             .setToken(token)
             .setSubject(" ")
             .setAudioOnly(audioOnly)
-            .setFeatureFlag("chat.enabled", false)
+            .setFeatureFlag("chat.enabled", true)
             .setFeatureFlag("invite.enabled", false)
             .setFeatureFlag("calendar.enabled", false)
+            .setFeatureFlag("video-share.enabled", false)
+            .setFeatureFlag("live-streaming.enabled", false)
             .setWelcomePageEnabled(false).build();
 
         JitsiMeetPluginActivity.launch(cordova.getActivity(), options);
